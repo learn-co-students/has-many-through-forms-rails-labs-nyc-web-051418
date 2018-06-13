@@ -1,12 +1,11 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :post
-  accepts_nested_attributes_for :user
+  accepts_nested_attributes_for :user, reject_if: :username_not_entered
 
-  def user_attributes=(username)
-    if username.values[0] != ""
-      self.user = User.find_or_create_by(username: username.values[0])
-    end
+  private
+  def username_not_entered(attributes)
+    attributes["username"].empty?
   end
 
 end
