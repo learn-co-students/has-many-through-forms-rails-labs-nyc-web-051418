@@ -6,9 +6,22 @@
   <%= category.name %>
 <% end %>
 <% @comments.each do |comment| %>
-  <%=comment.content %>
+  <p><%=comment.user.username%> says: <%=comment.content %></p>
 <% end %>
 <p> Users who have Commented: </p>
-<% @users.each do |user| %>
+<% @comment_users.each do |user| %>
   <a href="<%=user_path(user)%>"><%= user.username %></a>
 <% end %>
+<p>Create a Comment:</p>
+<%= form_for @comment do |f| %>
+  <%= f.text_field :content %>
+  <%= f.collection_select :user_id, @users, :id, :username %>
+  Or, create a new user:
+    <%= f.fields_for :user do |user| %>
+      <% user.text_field :username %>
+    <% end %>
+  <%= f.submit %>
+  <%= hidden_field_tag "comment[post_id]", params[:id] %>
+<% end %>
+
+<form

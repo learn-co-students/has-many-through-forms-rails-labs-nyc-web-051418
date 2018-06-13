@@ -9,16 +9,5 @@
   <%= category.text_field :name %>
 <% end %>
 
-<p>Create a Comment:</p>
-<%= f.fields_for :comments do |comment| %>
-  <%= comment.text_field :content %>
-  <%= comment.collection_select :user_ids, @users, :id, :username %>
-  Or, create a new user:
-    <%= comment.fields_for :new_user do |user| %>
-      <% user.text_field :username %>
-      <% user.text_field :email %>
-    <% end %>
-<% end %>
-<br>
 <%= f.submit %>
 <% end %>
