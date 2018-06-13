@@ -1,1 +1,52 @@
 
+<label>Post title: <%= @post.title %></label><br>
+<label>Post content: <%= @post.content %></label><br>
+
+<label>List of comments:</label>
+<ul>
+<% @comments.each do |comment| %>
+  <li><%= comment.content  %></li>
+<% end  %>
+</ul>
+
+<label>List of users without duplicates:</label>
+<ul>
+<% @users.uniq.each do |user| %>
+  <li><%= link_to user.username, user_path(user) %></li>
+<% end  %>
+</ul>
+
+
+
+
+<br>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<br>
+
+
+<%# %>
+
+
+<%= form_for @comment do |f| %>
+
+  <%= f.label "Select your username:" %> <br>
+  <%= f.collection_select :user_id, User.all, :id, :username %> <br>
+
+
+
+  <%= f.label "Share your comment" %> <br>
+  <%= f.text_area :content %> <br>
+
+  <%# f.label "Select a user:" %> <br>
+  <%# f.collection_select :user_ids, User.all, :id, :username %> <br>
+
+    <%# f.fields_for :users do |user| %>
+      <%# f.label "Can't find your username? Add one here:" %> <br>
+      <%# categories_fields.text_field :name %>
+    <%# end %>
+  <%= f.submit %>
+<% end %>
