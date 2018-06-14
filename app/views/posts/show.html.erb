@@ -12,16 +12,16 @@
 <label><strong>List of comments:</strong></label>
   <ul>
   <% @post.comments.each do |comment| %>
-    <li><%= comment.content %> -<%= link_to comment.user.username, comment.user %></li>
+    <li><%= comment.content %> -<%# link_to comment.user.username, comment.user %></li>
   <% end  %>
   </ul>
 
-<!-- <label><strong>List of users without duplicates:</strong></label>
+<label><strong>List of users without duplicates:</strong></label>
 <ul>
-<%# @users.uniq.each do |user| %>
-  <li><%# link_to user.username, user_path(user) %></li>
-<%# end  %>
-</ul> -->
+<% @users.uniq.each do |user| %>
+  <li><%= link_to user.username, user_path(user) %></li>
+<% end  %>
+</ul>
 
 <br>
 <hr>

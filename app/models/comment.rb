@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
 
   def valid_user?(user)
       byebug
-      user.empty?
+      user["username"].empty?
   end
 
 
