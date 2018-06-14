@@ -1,1 +1,8 @@
-
+<h1>Related Posts</h1>
+<ul>
+<li>Username: <%= @user.username %></li>
+  <% @user.comments.each do |comment| %>
+    <li>Post: <%= link_to comment.post.title, post_path(comment) %></li>
+    <li>Content:<%= comment.post.content %></li>
+    <% end %>
+</ul>
