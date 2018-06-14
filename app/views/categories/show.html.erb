@@ -1,1 +1,9 @@
-<%= @category.name %>
+<h1>Welcome to the page for <%= @category.name %></h1>
+
+<h3>Here is a list of posts with this tag:</h3>
+
+<ul>
+<% @category.posts.each do |post|  %>
+    <li><%= link_to post.title, post_path(post) %> </li><br>
+<% end %>
+</ul>

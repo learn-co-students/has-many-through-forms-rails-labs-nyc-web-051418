@@ -16,12 +16,12 @@
   <% end  %>
   </ul>
 
-<label><strong>List of users without duplicates:</strong></label>
+<!-- <label><strong>List of users without duplicates:</strong></label>
 <ul>
-<% @users.uniq.each do |user| %>
-  <li><%= link_to user.username, user_path(user) %></li>
-<% end  %>
-</ul>
+<%# @users.uniq.each do |user| %>
+  <li><%# link_to user.username, user_path(user) %></li>
+<%# end  %>
+</ul> -->
 
 <br>
 <hr>
@@ -29,7 +29,7 @@
 
 <%= form_for @comment do |f| %>
   <%= f.label "Select your username:" %> <br>
-  <%= f.collection_select :user_id, User.all, :id, :username %> <br>
+  <%= f.collection_select :user_id, User.all, :id, :username, include_blank: ""%> <br>
   <br>
   <%= f.fields_for :users_attributes, @post.users.build do |users_fields| %>
     <%= users_fields.label "Can't find your username? Add one here:" %> <br>
