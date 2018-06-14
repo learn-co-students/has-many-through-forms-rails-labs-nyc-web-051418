@@ -1,1 +1,4 @@
 
+<% @posts.each do |post| %>
+<a href="<%=post_path(post.id)%>"><%=post.title %></a>
+<% end %>
