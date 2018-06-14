@@ -1,1 +1,9 @@
+<h1>Welcome to <%= @user.username %>'s page</h1>
 
+<h3>Here's a list of the posts they've commented on:</h3>
+
+<ul>
+<% @user.posts.each do |post| %>
+  <li><%= link_to post.title, post_path(post) %></li>
+<% end %>
+</ul>

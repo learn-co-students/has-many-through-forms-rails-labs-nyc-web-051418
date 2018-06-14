@@ -1,1 +1,43 @@
 
+<label><strong>Post title:</strong> <%= @post.title %></label><br>
+<label><strong>Post content:</strong> <%= @post.content %></label><br>
+
+<label><strong>This post's categories:</strong>
+  <ul>
+  <% @post.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+  </ul>
+
+<label><strong>List of comments:</strong></label>
+  <ul>
+  <% @post.comments.each do |comment| %>
+
+    <li><%= comment.user.username %> says: <%= comment.content %></li>
+  <% end  %>
+  </ul>
+
+<label><strong>List of users without duplicates:</strong></label>
+<ul>
+<% @users.uniq.each do |user| %>
+  <li><%= link_to user.username, user_path(user) %></li>
+<% end  %>
+</ul>
+
+<br>
+<hr>
+<br>
+
+
+<%= form_for @comment do |f| %>
+  <%= f.collection_select :user_id, User.all, :id, :username, :include_blank => true %> <br>
+  <br>
+    <%= f.fields_for :user_attributes, @post.users.build do |user| %>
+      <%= user.text_field :username %><br>
+  <% end %>
+
+  <%= f.label "Content" %><br>
+  <%= f.hidden_field :post_id %>
+  <%= f.text_area :content %><br><br>
+  <%= f.submit %>
+<% end %>
