@@ -1,1 +1,24 @@
+<!-- Create a form at posts#new to create a new post. The form should include check boxes for us to select categories as well as a text field to create a new category. You should do this with a nested form so that our controller stays thin. Also,
+typing in a Category name that already exists should not create a new category. Instead, if we type in a category that already exists, we should select it from the database and associate the post we've created with the existing category. -->
 
+<h1>New Post</h1>
+
+<%= form_for @post do |f|%><br>
+
+  <%= f.label :title  %>
+  <%= f.text_field :title %><br><br>
+
+  <%= f.label :content  %>
+  <%= f.text_area :content %><br><br>
+
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b| %>
+    <p><%= b.label %><%= b.check_box %></p>
+  <% end %>
+
+  <%= f.fields_for :categories do |b| %>
+    <p>New Category Name: <%= b.text_field :name %></p>
+  <% end %>
+
+<%= f.submit "Create Post" %>
+
+<% end %>
