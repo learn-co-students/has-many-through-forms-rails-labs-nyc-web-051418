@@ -2,7 +2,11 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.create(comment_params)
+    comment.save
     redirect_to comment.post
+  end
+
+  def new
   end
 
   private
