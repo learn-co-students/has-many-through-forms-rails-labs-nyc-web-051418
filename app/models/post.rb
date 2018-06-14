@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
     self.categories.all
   end
 
+  #this method prevents duplicate categories. Instead finds if the input exists
   def categories_attributes=(category_attributes)
     category_attributes.values.each do |category_attribute|
       category = Category.find_or_create_by(category_attribute)
