@@ -12,7 +12,8 @@
 <label><strong>List of comments:</strong></label>
   <ul>
   <% @post.comments.each do |comment| %>
-    <li><%= comment.content %> -<%# link_to comment.user.username, comment.user %></li>
+
+    <li><%= comment.user.username %> says: <%= comment.content %></li>
   <% end  %>
   </ul>
 
@@ -27,16 +28,16 @@
 <hr>
 <br>
 
+
 <%= form_for @comment do |f| %>
-  <%= f.label "Select your username:" %> <br>
-  <%= f.collection_select :user_id, User.all, :id, :username, include_blank: ""%> <br>
+  <%= f.collection_select :user_id, User.all, :id, :username, :include_blank => true %> <br>
   <br>
-  <%= f.fields_for :users_attributes, @post.users.build do |users_fields| %>
-    <%= users_fields.label "Can't find your username? Add one here:" %> <br>
-    <%= users_fields.text_field :username %><br>
-  <% end %> <br>
-  <%= f.label "Share your comment:" %> <br>
+    <%= f.fields_for :user_attributes, @post.users.build do |user| %>
+      <%= user.text_field :username %><br>
+  <% end %>
+
+  <%= f.label "Content" %><br>
   <%= f.hidden_field :post_id %>
-  <%= f.text_area :content %> <br>
+  <%= f.text_area :content %><br><br>
   <%= f.submit %>
 <% end %>

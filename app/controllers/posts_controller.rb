@@ -4,6 +4,7 @@ class PostsController < ApplicationController
     @comment = Comment.new(post_id: params[:id])
     @comments = Comment.all
     @users = User.all
+
   end
 
   def index
@@ -22,6 +23,8 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name], user_attributes: [:username])
+    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
+
+      # params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name], user_attributes: [:username])
   end
 end

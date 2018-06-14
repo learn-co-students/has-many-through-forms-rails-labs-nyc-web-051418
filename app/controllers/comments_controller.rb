@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
 
   def show
     @comment = Comment.find(params[:id])
+    @user = @comment.user
   end
 
   def index
@@ -14,6 +15,7 @@ class CommentsController < ApplicationController
 
   def create
       @comment = Comment.create(comment_params)
+      redirect_to @comment.post
   end
 
   private
